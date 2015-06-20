@@ -1,6 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
+	<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/core/css/style.css') }}">
 {% endblock %}
 
@@ -25,4 +26,10 @@
 		<p>&copy; {{ 'now' | date('Y') }} Symfony2 Blog</p>
 	</footer>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
 {% endblock %}
