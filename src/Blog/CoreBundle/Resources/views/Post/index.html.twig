@@ -1,0 +1,13 @@
+{% extends "CoreBundle::layout.html.twig" %}
+
+{% block title %}{{ 'post.plural' | trans }}{% endblock %}
+
+{% block section %}
+
+	{% for post in posts %}
+
+		{% include 'CoreBundle:Post:_post.html.twig' with { post: post } %}
+	    
+	{% endfor %}
+
+{% endblock %}

@@ -1,9 +1,0 @@
-<?php
-
-namespace Blog\CoreBundle\Tests\Controller;
-
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class DefaultControllerTest extends WebTestCase
-{
-}
