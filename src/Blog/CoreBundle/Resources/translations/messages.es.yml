@@ -4,5 +4,6 @@ by: por
 readmore: Leer mas
 
 post:
-	plural: Posts
-	on: Publicado en
+  plural: Posts
+  latest: Ultimos posts
+  on: Publicado en
