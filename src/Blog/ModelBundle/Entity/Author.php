@@ -3,13 +3,14 @@
 namespace Blog\ModelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert; 
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Author
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Blog\ModelBundle\Repository\AuthorRepository")
  */
 class Author extends Timestampable
 {
@@ -34,6 +35,14 @@ class Author extends Timestampable
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Post", mappedBy="author", cascade={"remove"})
      */
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"name"}, unique=false) 
+     * @ORM\Column(length=255)
+     */
+    private $slug;
 
     private $posts;
 
@@ -109,5 +118,28 @@ class Author extends Timestampable
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Author
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

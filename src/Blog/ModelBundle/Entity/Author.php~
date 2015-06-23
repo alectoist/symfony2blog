@@ -3,13 +3,14 @@
 namespace Blog\ModelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert; 
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Author
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Blog\ModelBundle\Repository\AuthorRepository")
  */
 class Author extends Timestampable
 {
@@ -35,7 +36,23 @@ class Author extends Timestampable
      * @ORM\OneToMany(targetEntity="Post", mappedBy="author", cascade={"remove"})
      */
 
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"name"}, unique=false) 
+     * @ORM\Column(length=255)
+     */
+    private $slug;
+
     private $posts;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -69,5 +86,37 @@ class Author extends Timestampable
     {
         return $this->name;
     }
-   
+    
+    /**
+     * Add posts
+     *
+     * @param \Blog\ModelBundle\Entity\Post $posts
+     * @return Author
+     */
+    public function addPost(Post $posts)
+    {
+        $this->posts[] = $posts;
+    
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     *
+     * @param \Blog\ModelBundle\Entity\Post $posts
+     */
+    public function removePost(\Blog\ModelBundle\Entity\Post $posts)
+    {
+        $this->posts->removeElement($posts);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
 }
