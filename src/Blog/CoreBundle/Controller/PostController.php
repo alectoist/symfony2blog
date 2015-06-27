@@ -51,12 +51,13 @@ class PostController extends Controller
             
         }
 
-        //return ['post' => $post];            
+        $form = $this->createForm(new CommentType());
 
         return $this->render(
             "CoreBundle:Post:show.html.twig",
                 [
-                    'post' => $post
+                    'post' => $post,
+                    'form' => $form->createView()
                 ]
             );
     }
