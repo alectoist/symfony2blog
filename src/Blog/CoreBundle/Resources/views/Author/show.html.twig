@@ -1,4 +1,4 @@
-{% extends "CoreBundle::layout:base.html.twig" %}
+{% extends "CoreBundle::layout.html.twig" %}
 
 {% block title %}
     {{ 'post.by.author' | trans({'%name%': author.name}) }}
@@ -14,9 +14,9 @@
 {% block section %}
     
 	{% for post in posts %}
-	    
 		{{ include('CoreBundle:Post:_post.html.twig', { post: post }) }}
-
+	{% else %}		    
+		{{ 'author.empty.posts' | trans }}
 	{% endfor %}
 
 {% endblock %}

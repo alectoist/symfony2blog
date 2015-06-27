@@ -8,3 +8,8 @@ post:
   plural: Posts
   latest: Ultimos posts
   on: Publicado en
+  by: Posts por
+  by.author: Posts by %name%
+
+author:
+  empty.posts: Esta autor no ha escrito ningun post todavia.
