@@ -1,8 +1,8 @@
 home: Inicio
 
+on: en
 by: por
 readmore: Leer mas
-author: Autor
 
 post:
   plural: Posts
@@ -10,6 +10,11 @@ post:
   on: Publicado en
   by: Posts por
   by.author: Posts by %name%
+  comments: '{0} Sin comentarios|{1} %count% comentario|]1,Inf] %count% comentarios'
+
+comment:
+  plural: Comentarios
 
 author:
+  title: Autor
   empty.posts: Esta autor no ha escrito ningun post todavia.

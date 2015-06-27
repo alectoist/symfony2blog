@@ -1,8 +1,8 @@
 home: Home
 
+on: on
 by: by
 readmore: Read more
-author: Author
 
 post:
   plural: Posts
@@ -10,6 +10,11 @@ post:
   on: Posted on
   by: Posts by
   by.author: Posts by %name%
+  comments: '{0} No comments|{1} %count% comment|]1,Inf] %count% comments'
+
+comment:
+  plural: Comments
 
 author:
+  title: Author
   empty.posts: This author did not write any posts

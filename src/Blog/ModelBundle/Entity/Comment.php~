@@ -101,27 +101,4 @@ class Comment extends Timestampable
     {
         return $this->body;
     }
-
-    /**
-     * Set post
-     *
-     * @param \Blog\ModelBundle\Entity\Post $post
-     * @return Comment
-     */
-    public function setPost(Post $post)
-    {
-        $this->post = $post;
-    
-        return $this;
-    }
-
-    /**
-     * Get post
-     *
-     * @return \Blog\ModelBundle\Entity\Post 
-     */
-    public function getPost()
-    {
-        return $this->post;
-    }
 }
