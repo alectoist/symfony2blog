@@ -71,7 +71,7 @@ class PostControllerTest extends WebTestCase
         
         $this->assertCount(
                 1,
-                $crawler->filter('html:contains("Your form was submitted successfully")'),
+                $crawler->filter('html:contains("Your comment was submitted successfully")'),
                 'There was no confirmation message'
                 );
     }

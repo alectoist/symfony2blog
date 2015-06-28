@@ -17,6 +17,7 @@ post:
 comment:
   singular: Comment
   plural: Comments
+  write: Write a comment
 
 author:
   title: Author

@@ -44,6 +44,12 @@ class Author extends Timestampable
      */
     private $slug;
 
+    /**
+     * @var Post
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="author")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
+     * @Assert\NotBlank
+     */
     private $posts;
 
     /**

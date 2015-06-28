@@ -44,6 +44,12 @@ class Author extends Timestampable
      */
     private $slug;
 
+    /**
+     * @var Post
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="author")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
+     * @Assert\NotBlank
+     */
     private $posts;
 
     /**
@@ -118,5 +124,28 @@ class Author extends Timestampable
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Author
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
