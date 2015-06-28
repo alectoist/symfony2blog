@@ -61,4 +61,9 @@ class PostController extends Controller
                 ]
             );
     }
+
+    public function createCommentAction(Request $request, $slug)
+    {
+         
+    }
 }
