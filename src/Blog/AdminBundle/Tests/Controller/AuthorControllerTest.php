@@ -6,50 +6,67 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AuthorControllerTest extends WebTestCase
 {
-    /*
+    /**
+     * Tests the author CRUD
+     */
     public function testCompleteScenario()
     {
         // Create a new client to browse the application
-        $client = static::createClient();
+        $client = static::createClient([],
+                [
+                    'PHP_AUTH_USER' => 'admin',
+                    'PHP_AUTH_PW' => 'admin'
+                ]
+                );
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/author/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /author/");
+        $crawler = $client->request('GET', '/admin/author/');
+        $this->assertTrue($client->getResponse()->isSuccessful(), "The response was not successful");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
-        $form = $crawler->selectButton('Create')->form(array(
-            'blog_modelbundle_author[field_name]'  => 'Test',
-            // ... other fields to fill
-        ));
+        $form = $crawler->selectButton('Create')->form(
+                array(
+                    'blog_modelbundle_author[name]' => 'Somebody'
+                )
+                );
 
         $client->submit($form);
         $crawler = $client->followRedirect();
 
         // Check data in the show view
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("Test")')->count(), 'Missing element td:contains("Test")');
+        $this->assertGreaterThan(
+                0, 
+                $crawler->filter('td:contains("Someone")')->count(), 
+                'The new author is not showing up'
+                );
 
         // Edit the entity
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
-        $form = $crawler->selectButton('Update')->form(array(
-            'blog_modelbundle_author[field_name]'  => 'Foo',
+        $form = $crawler->selectButton('Update')->form(
+                array(
+            'blog_modelbundle_author[name]'  => 'Another name',
             // ... other fields to fill
         ));
 
         $client->submit($form);
         $crawler = $client->followRedirect();
 
-        // Check the element contains an attribute with value equals "Foo"
-        $this->assertGreaterThan(0, $crawler->filter('[value="Foo"]')->count(), 'Missing element [value="Foo"]');
+        // Check the element contains an attribute with value equals "Another name"
+        $this->assertGreaterThan(
+                0, 
+                $crawler->filter('[value="Another name"]')->count(), 
+                'Edited author missing'
+                );
 
         // Delete the entity
         $client->submit($crawler->selectButton('Delete')->form());
         $crawler = $client->followRedirect();
 
-        // Check the entity has been delete on the list
-        $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
+        // Check the entity that has been deleted on the list
+        $this->assertNotRegExp('/Another name/', $client->getResponse()->getContent());
     }
 
-    */
+    
 }
