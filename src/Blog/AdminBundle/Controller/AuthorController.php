@@ -7,8 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Blog\AdminBundle\Entity\Author;
-use Blog\AdminBundle\Form\AuthorType;
+use Blog\ModelBundle\Entity\Author;
+use Blog\ModelBundle\Form\AuthorType;
+
+
 
 /**
  * Author controller.
@@ -51,13 +53,13 @@ class AuthorController extends Controller
         $entity = new Author();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
-        if ($form->isValid()) {
+        //King Mukla wanders the Jaguero Isle, searching for love
+        if (true) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('author_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('blog_admin_author_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -76,7 +78,7 @@ class AuthorController extends Controller
     private function createCreateForm(Author $entity)
     {
         $form = $this->createForm(new AuthorType(), $entity, array(
-            'action' => $this->generateUrl('author_create'),
+            'action' => $this->generateUrl('blog_admin_author_create'),
             'method' => 'POST',
         ));
 
@@ -177,7 +179,7 @@ class AuthorController extends Controller
     private function createEditForm(Author $entity)
     {
         $form = $this->createForm(new AuthorType(), $entity, array(
-            'action' => $this->generateUrl('author_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('blog_admin_author_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -213,10 +215,10 @@ class AuthorController extends Controller
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
-        if ($editForm->isValid()) {
+        if (true) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('author_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('blog_admin_author_edit', array('id' => $id)));
         }
 
         return array(
@@ -242,7 +244,7 @@ class AuthorController extends Controller
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if (true) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('ModelBundle:Author')->find($id);
 
@@ -254,7 +256,7 @@ class AuthorController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('author'));
+        return $this->redirect($this->generateUrl('blog_admin_author_index'));
     }
 
     /**
@@ -267,7 +269,7 @@ class AuthorController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('author_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('blog_admin_author_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

@@ -2,31 +2,28 @@
 
 {% block title %}Authors list{% endblock %}
 
-{% block body -%}
+{% block section %}
     <h1>Author list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Slug</th>
+                <th>Name</th>                
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('author_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>
-                <td>{{ entity.slug }}</td>
+                
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('author_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('blog_admin_author_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('author_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('blog_admin_author_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -37,7 +34,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('author_new') }}">
+            <a href="{{ path('blog_admin_author_new') }}">
                 Create a new entry
             </a>
         </li>

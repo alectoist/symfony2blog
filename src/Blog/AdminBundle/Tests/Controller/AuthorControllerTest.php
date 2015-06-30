@@ -37,7 +37,7 @@ class AuthorControllerTest extends WebTestCase
         // Check data in the show view
         $this->assertGreaterThan(
                 0, 
-                $crawler->filter('td:contains("Someone")')->count(), 
+                $crawler->filter('td:contains("Somebody")')->count(), 
                 'The new author is not showing up'
                 );
 
